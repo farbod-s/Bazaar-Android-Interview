@@ -7,9 +7,8 @@ import ir.cafebazaar.tmdb.data.model.Movie
 @Entity(tableName = "movies")
 data class MovieLocalModel(
     @PrimaryKey(autoGenerate = true)
-    var uuid: Int = 0,
-
-    val id: Long = -1,
+    var uuid: Long = 0,
+    val id: Long,
     val title: String,
     val cover: String,
 )

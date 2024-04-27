@@ -1,5 +1,6 @@
 package ir.cafebazaar.tmdb.data.local.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,9 +11,15 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDao {
 
-    @Query("SELECT * FROM movies ORDER BY uuid DESC")
+    @Query("SELECT * FROM movies ORDER BY uuid ASC")
     fun getMovies(): Flow<List<MovieLocalModel>>
 
+    @Query("SELECT * FROM movies")
+    fun pagingSource(): PagingSource<Int, MovieLocalModel>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(items: List<MovieLocalModel>)
+    suspend fun insertMovies(items: List<MovieLocalModel>)
+
+    @Query("DELETE FROM movies")
+    suspend fun clearMovies()
 }

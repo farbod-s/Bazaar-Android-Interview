@@ -8,7 +8,7 @@ class DefaultMovieRemoteDataSource @Inject constructor(
     private val moviesApi: MovieApiService,
 ) : MovieRemoteDataSource {
 
-    override suspend fun getMovies(): List<MovieRemoteModel> {
-        return moviesApi.getUpcomingMovies().results
+    override suspend fun getMovies(page: Int): List<MovieRemoteModel> {
+        return moviesApi.getUpcomingMovies(page).results
     }
 }
