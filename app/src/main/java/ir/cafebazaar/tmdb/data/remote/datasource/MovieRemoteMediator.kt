@@ -89,8 +89,7 @@ class MovieRemoteMediator @Inject constructor(
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, MovieLocalModel>): RemoteKeys? {
         // Get the last page that was retrieved, that contained items.
         // From that last page, get the last item
-        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
-            ?.let { movie ->
+        return state.lastItemOrNull()?.let { movie ->
                 // Get the remote keys of the last item retrieved
                 localDataSource.getRemoteKeysByMovieId(movie.id)
             }
@@ -99,9 +98,8 @@ class MovieRemoteMediator @Inject constructor(
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, MovieLocalModel>): RemoteKeys? {
         // Get the first page that was retrieved, that contained items.
         // From that first page, get the first item
-        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
-            ?.let { movie ->
-                // Get the remote keys of the first items retrieved
+        return state.firstItemOrNull()?.let { movie ->
+                // Get the remote keys of the first item retrieved
                 localDataSource.getRemoteKeysByMovieId(movie.id)
             }
     }

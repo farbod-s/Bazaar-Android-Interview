@@ -75,6 +75,7 @@ dependencies {
     kapt(libs.google.dagger.hilt.compiler)
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)
+    implementation(libs.coil.kt.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.androidx.paging.common)
