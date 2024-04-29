@@ -43,8 +43,12 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
 
     testImplementation(libs.junit)
-    testImplementation(libs.androidx.paging.common)
+    androidTestImplementation(libs.androidx.paging.common)
+    androidTestImplementation(libs.jetbrains.kotlin.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.test)
+    androidTestImplementation(libs.mockito.core)
+    androidTestImplementation(libs.mockito.android)
 }
 
 // Allow references to generated code
