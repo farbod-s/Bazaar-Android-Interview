@@ -1,21 +1,16 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.jetbrainsKotlinKapt)
-    alias(libs.plugins.googleKotlinKsp)
     alias(libs.plugins.hiltAndroid)
 }
 
 android {
-    namespace = "ir.cafebazaar.tmdb"
+    namespace = "ir.cafebazaar.ui"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ir.cafebazaar.tmdb"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -53,9 +48,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.ui)
-    implementation(projects.feature.upcoming)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.compose.runtime)
@@ -65,17 +57,13 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.paging.compose)
     implementation(libs.google.dagger.hilt)
     kapt(libs.google.dagger.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
 
 // Allow references to generated code

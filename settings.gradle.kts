@@ -20,4 +20,12 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "TMDB"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":app")
+include(":core:network")
+include(":core:database")
+include(":core:data")
+include(":core:ui")
+include(":feature:upcoming")

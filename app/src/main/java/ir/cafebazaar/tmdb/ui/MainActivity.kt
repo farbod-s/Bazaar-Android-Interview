@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import dagger.hilt.android.AndroidEntryPoint
-import ir.cafebazaar.tmdb.ui.theme.TMDBTheme
+import ir.cafebazaar.ui.theme.TMDBTheme
+import ir.cafebazaar.upcoming.UpcomingMoviesScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
