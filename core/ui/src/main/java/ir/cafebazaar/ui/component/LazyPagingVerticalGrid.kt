@@ -9,9 +9,11 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import ir.cafebazaar.ui.R
 
 @Composable
 fun <T : Any> LazyPagingVerticalGrid(
@@ -35,7 +37,9 @@ fun <T : Any> LazyPagingVerticalGrid(
 
             is LoadState.Error -> {
                 val e = items.loadState.refresh as LoadState.Error
-                errorContent(e.error.message ?: "Unknown Error") {
+                errorContent(
+                    e.error.message ?: LocalContext.current.getString(R.string.error_unknown)
+                ) {
                     items.refresh()
                 }
             }
@@ -64,7 +68,10 @@ fun <T : Any> LazyPagingVerticalGrid(
                         is LoadState.Error -> {
                             val e = items.loadState.append as LoadState.Error
                             item(span = { GridItemSpan(maxLineSpan) }) {
-                                errorItemContent(e.error.message ?: "Unknown Error") {
+                                errorItemContent(
+                                    e.error.message
+                                        ?: LocalContext.current.getString(R.string.error_unknown)
+                                ) {
                                     items.retry()
                                 }
                             }

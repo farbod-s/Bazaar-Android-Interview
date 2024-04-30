@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_message_io">Seems like there\'s an internet connection problem.</string>
+    <string name="error_message_generic">Something went wrong</string>
+</resources>

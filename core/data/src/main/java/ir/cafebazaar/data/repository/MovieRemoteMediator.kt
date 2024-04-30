@@ -72,8 +72,8 @@ class MovieRemoteMediator @Inject constructor(
             val movies = remoteDataSource.getMovies(page)
                 .map(MovieRemoteModel::asLocalModel)
             val endOfPaginationReached = movies.isEmpty()
-            val prevKey = if (page == 1) null else page - 1
-            val nextKey = if (endOfPaginationReached) null else page + 1
+            val prevKey = if (page == 1) null else page.minus(1)
+            val nextKey = if (endOfPaginationReached) null else page.plus(1)
             val keys = movies.map {
                 RemoteKeys(
                     movieId = it.id,

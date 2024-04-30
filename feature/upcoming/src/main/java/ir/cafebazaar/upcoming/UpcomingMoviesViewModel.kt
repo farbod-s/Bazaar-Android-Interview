@@ -15,6 +15,7 @@ class UpcomingMoviesViewModel @Inject constructor(
     repository: MovieRepository,
 ) : ViewModel() {
 
-    val moviePagingDataFlow: Flow<PagingData<Movie>> = repository.getUpcomingMovies()
-        .cachedIn(viewModelScope)
+    val moviePagingDataFlow: Flow<PagingData<Movie>> =
+        repository.getUpcomingMovies()
+            .cachedIn(viewModelScope)
 }
