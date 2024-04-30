@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UpcomingMoviesViewModel @Inject constructor(
-    repository: MovieRepository,
+    repository: MovieRepository
 ) : ViewModel() {
 
     val moviePagingDataFlow: Flow<PagingData<Movie>> =

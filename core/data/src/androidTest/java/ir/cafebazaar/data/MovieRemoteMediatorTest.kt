@@ -8,7 +8,9 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import ir.cafebazaar.data.repository.MovieRemoteMediator
+import ir.cafebazaar.data.utils.CacheValidator
 import ir.cafebazaar.database.datasource.MovieLocalDataSource
+import ir.cafebazaar.database.datasource.PreferencesLocalDataSource
 import ir.cafebazaar.database.model.MovieLocalModel
 import ir.cafebazaar.database.model.RemoteKeys
 import ir.cafebazaar.network.datasource.MovieRemoteDataSource
@@ -31,6 +33,12 @@ class MovieRemoteMediatorTest {
 
     @Mock
     lateinit var mockLocalDataSource: MovieLocalDataSource
+
+    @Mock
+    lateinit var mockPreferencesLocalDataSource: PreferencesLocalDataSource
+
+    @Mock
+    lateinit var mockCacheValidator: CacheValidator
 
     @InjectMocks
     lateinit var mediator: MovieRemoteMediator
