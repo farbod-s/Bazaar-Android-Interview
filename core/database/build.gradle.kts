@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.room.paging)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.datastore.preferences)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.jetbrains.kotlin.coroutines.test)

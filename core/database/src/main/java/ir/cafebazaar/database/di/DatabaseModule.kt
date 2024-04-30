@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import ir.cafebazaar.database.db.MovieDao
 import ir.cafebazaar.database.db.MovieDatabase
 import ir.cafebazaar.database.db.RemoteKeysDao
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -20,8 +21,10 @@ object DatabaseModule {
     ): MovieDatabase = MovieDatabase.getInstance(context)
 
     @Provides
+    @Singleton
     fun provideMovieDao(database: MovieDatabase): MovieDao = database.movieDao()
 
     @Provides
+    @Singleton
     fun provideRemoteKeysDao(database: MovieDatabase): RemoteKeysDao = database.remoteKeysDao()
 }

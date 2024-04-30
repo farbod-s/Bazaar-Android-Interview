@@ -5,7 +5,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import ir.cafebazaar.data.model.asLocalModel
+import ir.cafebazaar.data.utils.CacheValidator
 import ir.cafebazaar.database.datasource.MovieLocalDataSource
+import ir.cafebazaar.database.datasource.PreferencesLocalDataSource
 import ir.cafebazaar.database.model.MovieLocalModel
 import ir.cafebazaar.database.model.RemoteKeys
 import ir.cafebazaar.network.datasource.MovieRemoteDataSource
@@ -16,6 +18,8 @@ import javax.inject.Inject
 class MovieRemoteMediator @Inject constructor(
     private val remoteDataSource: MovieRemoteDataSource,
     private val localDataSource: MovieLocalDataSource,
+    private val preferencesLocalDataSource: PreferencesLocalDataSource,
+    private val cacheValidator: CacheValidator
 ) : RemoteMediator<Int, MovieLocalModel>() {
 
     override suspend fun initialize(): InitializeAction {
@@ -23,7 +27,12 @@ class MovieRemoteMediator @Inject constructor(
         // append until refresh has succeeded. In cases where we don't mind showing out-of-date,
         // cached offline data, we can return SKIP_INITIAL_REFRESH instead to prevent paging
         // triggering remote refresh.
-        return InitializeAction.LAUNCH_INITIAL_REFRESH
+        val isCacheValid = cacheValidator.isValid()
+        return if (isCacheValid) {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        } else {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
     }
 
     override suspend fun load(
@@ -75,6 +84,7 @@ class MovieRemoteMediator @Inject constructor(
 
             localDataSource.withTransaction {
                 if (loadType == LoadType.REFRESH) {
+                    preferencesLocalDataSource.setLastFetchTimestamp(System.currentTimeMillis())
                     localDataSource.clearRemoteKeys()
                     localDataSource.clearMovies()
                 }
